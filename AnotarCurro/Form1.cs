@@ -234,5 +234,37 @@ namespace AnotarCurro
                 txtInfo.AppendText("Datos Invalidos");
             }
         }
+
+        private void btLista_Click(object sender, EventArgs e)
+        {
+            bool acabado = false;
+            conectar();
+            if (datos)
+            {
+                conectar();
+                try
+                {
+                    sw.WriteLine("list");
+                    sw.Flush();
+                    while (!acabado)
+                    {
+                        string cadena = sr.ReadLine();
+                        if (cadena != null)
+                        {
+                            txtInfo.AppendText(cadena);
+                            txtInfo.AppendText(Environment.NewLine);
+                        }
+                        else
+                        {
+                            acabado = true; ;
+                        }
+                    }
+                }
+                catch (IOException)
+                {
+                    txtInfo.AppendText("Sin conexion con el servidor");
+                }
+            }
+        }
     }
 }
